@@ -1,0 +1,93 @@
+Q1)
+    1)2)
+      Declare 
+             Today date:= sysdate;
+             Tomorrow Today%type;
+      Begin 
+             Tomorrow:=Today + 1;
+             DBMS_OUTPUT.PUT_LINE('Hellow world');
+             DBMS_OUTPUT.PUT_LINE(Today);
+             DBMS_OUTPUT.PUT_LINE(Tomorrow);
+      END;
+
+    
+
+   3)
+
+     DECLARE 
+             my_date Date:=sysdate;
+             v_lastdate Date:=last_day(my_date);
+     BEGIN 
+             DBMS_OUTPUT.PUT_LINE(TO_CHAR(my_date, 'Month dd, yyyy'));
+             DBMS_OUTPUT.PUT_LINE(TO_CHAR(v_lastdate, 'Month dd, yyyy'));
+     
+     END;
+
+
+  4)
+
+     DECLARE 
+            my_date Date:=sysdate  ;
+            new_date Date;
+            date_diff number;
+     BEGIN 
+            new_date:= my_date +45;
+            date_diff:=months_between( new_date ,my_date );
+
+            DBMS_OUTPUT.PUT_LINE('Today date is :  ' || my_date);
+            DBMS_OUTPUT.PUT_LINE('New date is :  ' || new_date);
+            DBMS_OUTPUT.PUT_LINE('Number of months: ' || date_diff);
+   
+     END;
+
+
+
+
+
+
+Q2)
+    create table countries
+      ( country_name varchar2(50),
+        median_age NUMBER(6.2)
+      );
+
+
+     insert into countries
+         values('England ',40.7);
+
+     insert into countries
+         values('Swesra ',42.7);
+
+     insert into countries
+         values('Japan ',49.4);
+
+
+
+
+
+
+Declare  
+     v_country_name countries.country_name%type; 
+     v_median_age countries.median_age%type;
+
+     cursor curs_country
+      is
+      SELECT country_name, median_age 
+      FROM countries
+      WHERE country_name = 'Japan';
+
+Begin 
+     open curs_country;
+    FETCH curs_country INTO v_country_name, v_median_age;  
+
+     if curs_country%fOUND
+     then
+     DBMS_OUTPUT.PUT_LINE('The median age in ' || v_country_name || ' is ' || v_median_age || '.');
+     end if;
+     close curs_country;
+
+End;
+    
+
+
+
